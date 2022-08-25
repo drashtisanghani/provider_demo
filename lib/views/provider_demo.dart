@@ -25,23 +25,24 @@ class _ProviderDemoScreenState extends State<ProviderDemoScreen> {
       appBar: AppBar(
         title: const Text("Provider Demo"),
       ),
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(20),
-            child: postMdl.post.data == null
-                ? const Center(child: CircularProgressIndicator())
-                : Text(
-                    postMdl.post.data!.adId!.admob_banner.toString(),
-                    style:
-                        const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      body: ListView.builder(
+          itemCount: postMdl.post.length,
+          itemBuilder: (context, index) => ListTile(
+                title: Text(postMdl.post[index].userId.toString()),
+                subtitle: Column(children: [
+                  Row(
+                    children: [
+                      Text(postMdl.post[index].id.toString()),
+                    ],
                   ),
-          ),
-          const SizedBox(height: 20),
-         
-        ],
-      ),
-      
+                  Row(
+                    children: [
+                      Flexible(
+                          child: Text(postMdl.post[index].title.toString())),
+                    ],
+                  ),
+                ]),
+              )),
     );
   }
 }
